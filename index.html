@@ -5,15 +5,63 @@
   <title>Document</title>
 </head>
 <body>
+    <style>
+    body {
+      background-color:pink;
+      display: flex;
+      height: 90vh;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+  <div class="input-container">
+      <label for="search-input">Search:</label>
+      <input
+        value=""
+        type="text"
+        name="decimal number input"
+        id="search-input"
+        class="search-input"
+      />
+      <button class="search-btn" id="search-btn">Search</button>
+  </div>
   <img src="#">
  <script>
   const img = document.querySelector('img');
-  fetch('https://api.giphy.com/v1/gifs/translate?api_key=tJpxCdKAb4sssyhZR7oFtkctocM3F3qC&s=horses', {mode: 'cors'})
+  const searchInput = document.getElementById("search-input");
+  const searchBtn = document.getElementById("search-btn");
+
+  const checkUserInput = () => {
+    console.log(searchInput.value);
+  };
+
+ 
+
+  const fetchNewImage = () => {
+    fetch(`https://api.giphy.com/v1/gifs/translate?api_key=tJpxCdKAb4sssyhZR7oFtkctocM3F3qC&s=${searchInput.value}`, {mode: 'cors'})
     .then(function(response) {
       return response.json();
     })
     .then(function(response) {
       img.src = response.data.images.original.url;
+    })
+    .catch(e => {
+      console.log(e)
+    });
+  }
+
+  searchBtn.addEventListener("click", fetchNewImage);
+
+  
+  fetch('https://api.giphy.com/v1/gifs/translate?api_key=tJpxCdKAb4sssyhZR7oFtkctocM3F3qC&s=clouds', {mode: 'cors'})
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(response) {
+      img.src = response.data.images.original.url;
+    })
+    .catch(e => {
+      console.log(e)
     });
 </script>
 </body>
