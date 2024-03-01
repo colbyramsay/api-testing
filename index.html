@@ -9,15 +9,21 @@
     body {
       background-color:pink;
       display: flex;
+      flex-direction: column;
       height: 90vh;
       align-items: center;
       justify-content: center;
     }
+
+    .input-container {
+      margin: 20px;
+    }
   </style>
+
   <div class="input-container">
       <label for="search-input">Search:</label>
       <input
-        value=""
+        value="clouds"
         type="text"
         name="decimal number input"
         id="search-input"
@@ -25,7 +31,10 @@
       />
       <button class="search-btn" id="search-btn">Search</button>
   </div>
-  <img src="#">
+  <div class="gif-container">
+    <img src="#">
+  </div>
+  
  <script>
   const img = document.querySelector('img');
   const searchInput = document.getElementById("search-input");
@@ -34,8 +43,6 @@
   const checkUserInput = () => {
     console.log(searchInput.value);
   };
-
- 
 
   const fetchNewImage = () => {
     fetch(`https://api.giphy.com/v1/gifs/translate?api_key=tJpxCdKAb4sssyhZR7oFtkctocM3F3qC&s=${searchInput.value}`, {mode: 'cors'})
@@ -50,19 +57,10 @@
     });
   }
 
+  fetchNewImage();
+
   searchBtn.addEventListener("click", fetchNewImage);
 
-  
-  fetch('https://api.giphy.com/v1/gifs/translate?api_key=tJpxCdKAb4sssyhZR7oFtkctocM3F3qC&s=clouds', {mode: 'cors'})
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      img.src = response.data.images.original.url;
-    })
-    .catch(e => {
-      console.log(e)
-    });
 </script>
 </body>
 </html>
